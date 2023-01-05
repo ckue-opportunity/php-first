@@ -63,7 +63,52 @@
       if (!$redSelected || !$whiteSelected || $otherSelected) {
         echo " // Stimmt nicht - wo bist du zur Schule gangen?";
       }
-      
+
+      echo "<br><br>";
+
+      // Feedback zum Gewählten Säugetier ausgeben.
+      $mammal = $_POST["mammal"];
+
+      // "Rind", "Pferd", "Ziege", "Mensch" etc.
+      switch($mammal) {
+        case "Rind":
+          echo "Du Rindvieh!";
+          break;
+
+        case "Pferd":
+          echo "Du Pferd - falsch gesattelt!";
+          break;
+
+        case "Ziege":
+          echo "Du Geissbock!";
+          break;
+
+        default: 
+          echo "Ach, auch der Mensch ist ein Säugetier!";
+      }
+
+      echo "<br><br>";
+
+      // Schimpfwort finden und ersetzen
+      if (strlen($_POST["comment"]) > 0) {
+          // Variablen vorbereiten
+          $comment = $_POST["comment"];
+          $needles = array("fuck", "arschloch");
+          $replace = "#%$@";
+    
+          // In Kleinbuchstaben verwandeln
+          $comment = strtolower($comment); 
+    
+          // Schimpfworte ersetzen und den resultierenden Kommentar anzeigen.
+          $comment = str_replace($needles, $replace, $comment);
+          echo "Dein Kommentar: $comment";
+
+          // Falls notwendig Warnung
+          if (strlen($_POST["comment"]) > 20) {
+            echo "<br>Der Kommentar ist zu lang.";
+          }
+          
+      }
       ?><br>
       
 

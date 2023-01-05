@@ -44,7 +44,7 @@
 
 <!-- FORMULAR -->
 <form action="result.php" method="post">
-    <label for="name">Name:</label>
+<label for="name">Name:</label>
     <input type="text" id="name" name="name"><br>
     <label for="email">Email:</label>
     <input type="text" id="email" name="email"><br>
@@ -64,6 +64,40 @@
     <label for="color3">Blau</label><br>
     <input type="checkbox" id="color4" name="color-white" value="weiss">
     <label for="color4">Weiss</label><br><br>
+    
+    <p>Welches ist dein Lieblingstier?</p>
+    <select class="form-select" id="inputGroupSelect01" name="mammal">
+      <option selected>Auswählen...</option>
+
+      <?php
+        // Generiere die Tiernamen mit Hilfe einer while-Schleife.
+        $mammals = array("Rind", "Pferd", "Ziege", "Mensch");
+        $i = 0;
+        $length = count($mammals);
+
+        while ($i < $length) {
+          $m = $mammals[$i];
+          /*
+            Ich könnte folgendes verwenden:
+            echo '<option value="' . $m . '">' . $m . '</option>';
+            
+            Es ist aber kürzer und einfacher im String Template Format
+            mit Double-Quotes. Preis: Ich muss innerhalb der "" mit 
+            Single-Quotes arbeiten.
+          */
+          echo "<option value='$m'>$m</option>";
+
+          $i = $i + 1; // Kurzform: $i++;
+        }
+      ?>
+    </select>
+
+    <br><br>
+
+    <label for="name">Kommentar - bitte ohne Schimpfwörter, maximal 20 Buchstaben:</label>
+    <input type="text" id="comment" name="comment"><br>
+
+    <br><br>
 
     <input type="submit" value="Abschicken">
 </form>
