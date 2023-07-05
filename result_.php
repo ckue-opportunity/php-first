@@ -25,9 +25,9 @@
 
       <?php 
         /*
-          P03: Gib die ge-posteten Key-Value-Paare als Liste aus.
+          Gib die ge-posteten Key-Value-Paare als Liste aus.
         */
- 
+        prettyPrint($_POST); 
       ?>
 
       Willkommen <?php echo $_POST["name"]; ?>!<br>
@@ -37,7 +37,7 @@
       Du hast folgende Farben gewählt: 
       <?php 
       /*
-        P04: Die ausgewählten Farbwerte herausfiltern und als einfache Liste 
+        Die ausgewählten Farbwerte herausfiltern und als einfache Liste 
         ausgeben. Es werden nur die Werte mit 'color-' im Schlüssel (Key) 
         erkannt. Die Liste wird durch Kommas getrennt.
 
@@ -52,26 +52,82 @@
 
         Für str_contains() siehe auch https://www.php.net/manual/en/function.str-contains.php
       */
-      
+      $hasSelection = false;
+      $redSelected = false;
+      $whiteSelected = false;
+      $otherSelected = false;
+
+      foreach ($_POST as $key => $value) {
+        if (str_contains($key, 'color-')) {
+          if ($hasSelection) echo ", ";
+          echo $value;
+          $hasSelection = true;
+
+          // Prüfe, ob eine richtige Farbe gewählt wurde.
+          if ($value === 'rot') $redSelected = true;
+          elseif ($value === 'weiss') $whiteSelected = true;
+          else $otherSelected = true;
+        }
+      }
+
+      if (!$redSelected || !$whiteSelected || $otherSelected) {
+        echo " // Stimmt nicht - wo bist du zur Schule gangen?";
+      }
 
       echo "<br><br>";
 
       /*
-        P05: Zum gewählten Tier 'mammal' wird ein Feedback ausgegeben. Dazu verwenden wir
+        Zum gewählten Tier 'mammal' wird ein Feedback ausgegeben. Dazu verwenden wir
         switch() Verzweigungen.
       */
-      
+      $mammal = $_POST["mammal"];
+
+      // "Rind", "Pferd", "Ziege", "Mensch" etc.
+      switch($mammal) {
+        case "Rind":
+          echo "Du Rindvieh!";
+          break;
+
+        case "Pferd":
+          echo "Du Pferd - falsch gesattelt!";
+          break;
+
+        case "Ziege":
+          echo "Du Geissbock!";
+          break;
+
+        default: 
+          echo "Ach, auch der Mensch ist ein Säugetier!";
+      }
 
       echo "<br><br>";
 
       /*
-        P06: Im "comment"-Feld prüfen wir, ob gewisse Schimpfwörter wie
+        Im "comment"-Feld prüfen wir, ob gewisse Schimpfwörter wie
         "fuck" oder "arschloch" verwendet wurden und überschreiben
         jedes dieser Schimpfwörter mit "#%$@".
 
         Verwendete PHP Hilfsfunktionen: strlen(), strtolower(), str_replace()
       */
-      
+      if (strlen($_POST["comment"]) > 0) {
+          // Variablen vorbereiten
+          $comment = $_POST["comment"];
+          $needles = array("fuck", "arschloch");
+          $replace = "#%$@";
+    
+          // In Kleinbuchstaben verwandeln
+          $comment = strtolower($comment); 
+    
+          // Schimpfworte ersetzen und den resultierenden Kommentar anzeigen.
+          $comment = str_replace($needles, $replace, $comment);
+          echo "Dein Kommentar: $comment";
+
+          // Falls notwendig Warnung
+          if (strlen($_POST["comment"]) > 20) {
+            echo "<br>Der Kommentar ist zu lang.";
+          }
+          
+      }
       ?><br>
       
 

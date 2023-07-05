@@ -25,15 +25,16 @@
 <p>
     <?php
         /*
-          P01: Setze die Variable 'title' zu "Bitte fülle die Felder oder wähle aus."
+          Setze die Variable 'title' zu "Bitte fülle die Felder oder wähle aus."
           Gib den Wert von 'title' in die Seite aus (fett hervorgehoben).
         */
-
+        $title = "Bitte fülle die Felder oder wähle aus.";
+        echo "<strong>" . $title . "</strong>";
     ?>
 </p>
 
 <!-- FORMULAR -->
-<form action="result.php" method="post">
+<form action="result_.php" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name"><br>
     <label for="email">Email:</label>
@@ -64,7 +65,7 @@
 
       <?php
         /*
-          P02: Generiere die select-Optionen "Rind", "Pferd", "Ziege" und "Mensch" mit 
+          Generiere die select-Optionen "Rind", "Pferd", "Ziege" und "Mensch" mit 
           einer while-Schlaufe. Verwende für die 'mammals' einen indexierten Array.
 
           Der Optionsname und der angezeigte Optionswert sind jeweils immer 
@@ -75,7 +76,16 @@
           mit Double-Quotes. Preis: Ich muss innerhalb der "" mit 
           Single-Quotes arbeiten.
         */
-        
+        $mammals = array("Rind", "Pferd", "Ziege", "Mensch");
+        $i = 0;
+        $length = count($mammals);
+
+        while ($i < $length) {
+          $m = $mammals[$i];
+          echo "<option value='$m'>$m</option>";
+
+          $i = $i + 1; // Kurzform: $i++;
+        }
       ?>
     </select>
 
