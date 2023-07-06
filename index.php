@@ -17,6 +17,7 @@
 <?php 
     include "./includes/tools.php";
     include "./includes/header.php"; 
+    include "./includes/question-templates.php";
 ?>
 <!-- END:HEADER -->
 
@@ -28,7 +29,8 @@
           P01: Setze die Variable 'title' zu "Bitte fülle die Felder oder wähle aus."
           Gib den Wert von 'title' in die Seite aus (fett hervorgehoben).
         */
-
+        $title = "Bitte fülle die Felder oder wähle aus.";
+        echo "<strong>$title</strong>"; // the same: echo "<strong>" . $title . "</strong>";
     ?>
 </p>
 
@@ -39,12 +41,14 @@
     <label for="email">Email:</label>
     <input type="text" id="email" name="email"><br>
 
-    <p>&nbsp;</p><!-- Separator -->
-    <p>Geht es dir heute gut?</p>
-    <input type="radio" id="ja" name="radio-mood" value="ja">
-    <label for="ja">Ja</label><br>
-    <input type="radio" id="nein" name="radio-mood" value="nein">
-    <label for="nein">Nein</label><br><br>
+    <?php  
+      yesNoQuestion(
+        "01", 
+        "Ist die Schweiz in der EU?", 
+        array("ja", "nein"), 
+        1
+      );
+    ?>
 
     <p>&nbsp;</p><!-- Separator -->
     <p>Welche Farben hat die Schweizer Fahne?</p>
@@ -75,7 +79,17 @@
           mit Double-Quotes. Preis: Ich muss innerhalb der "" mit 
           Single-Quotes arbeiten.
         */
-        
+        $mammals = array("Rind", "Pferd", "Ziege", "Mensch", "R2D2");
+        $i = 0;
+        $length = count($mammals);
+
+        while ($i < $length) {
+          $mammal = $mammals[$i];
+          echo "<option>$mammal</option>";
+
+          // nächster Durchgang
+          $i = $i + 1; // abgekürzt: $i++;
+        }
       ?>
     </select>
 

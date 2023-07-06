@@ -107,7 +107,7 @@
         "fuck" oder "arschloch" verwendet wurden und überschreiben
         jedes dieser Schimpfwörter mit "#%$@".
 
-        Verwendete PHP Hilfsfunktionen: strlen(), strtolower(), str_replace()
+        Verwendete PHP Hilfsfunktionen: strlen(), strtolower(), str_ireplace()
       */
       if (strlen($_POST["comment"]) > 0) {
           // Variablen vorbereiten

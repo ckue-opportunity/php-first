@@ -8,11 +8,15 @@
                     Template mit dem Ersten Wort 'Hello').
                 */ 
                 $people = "Coders";
-                echo "Hello $people!";
+                echo "Hello $people";
 
                 // Aufforderung
-                echo " Diese Seite zeigt Werte aus \$_POST an.";
+                echo " - Have a nice day!";
             ?>
         </div>
     </div>
 </header>
+
+
+
+
